@@ -1,0 +1,2 @@
+import Bashrc
+bashrc = Bashrc()
