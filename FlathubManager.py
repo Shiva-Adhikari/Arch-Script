@@ -16,7 +16,6 @@ if __name__ == '__main__':
     "Telegram": "org.telegram.desktop",
     "Teams": "com.github.IsmaelMartinez.teams_for_linux",
     "Ultimate Media Downloader": "com.ktechpit.ultimate-media-downloader",
-    "LibreOffice": "org.libreoffice.LibreOffice",
     }
 
     flathub_manager = FlathubManager(flathub_packages)
