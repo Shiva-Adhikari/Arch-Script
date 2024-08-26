@@ -13,8 +13,4 @@ class BlackArchInstaller:
             subprocess.run(["chmod", "+x", "strap.sh"])
             subprocess.run(["sudo", "./strap.sh"])
             subprocess.run(["rm", "-rf", "strap.sh"])
-            
-            
-if __name__ == '__main__':
-    black_arch_installer = BlackArchInstaller()
-    black_arch_installer.install_black_arch()
+

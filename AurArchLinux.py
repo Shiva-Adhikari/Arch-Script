@@ -21,6 +21,8 @@ class AurArchLinux:
         "logseq-desktop-bin": "https://aur.archlinux.org/logseq-desktop-bin.git",
         }
 
+        self.key_id = ["662E3CDD6FE329002D0CA5BB40339DD82B12EF16"]    # Librewolf key
+
         self.packages = ["dnsmasq", "hostapd"]
         self.package_manager = PackageManager.PackageManager()
         self.package_manager.packages = self.packages       # Override the default package list
@@ -32,6 +34,10 @@ class AurArchLinux:
         # package_manager.packages = self.packages
         # package_manager.install_packages()
         
+        self.services = ["preload"]
+        self.package_manager = PackageManager.PackageManager()
+        self.package_manager.enable_packages = self.services
+        self.package_manager.enable_service()
 
 
     def install_aur_packages(self):
@@ -64,18 +70,9 @@ class AurArchLinux:
             os.chdir("..")
             subprocess.run(["rm","-rf",package_name])
             
-    def enable_service(self, enable_packages):
-# first check status if not enable run this program
-        for enable_package in enable_packages:
-            status = subprocess.run(["systemctl", "is-enabled", enable_package], capture_output=True, text=True)
-            if status.returncode == 0:
-                print(f"{enable_package} already enabled")
-            else:
-                subprocess.run(["sudo", "systemctl", "enable", enable_package])
-                print(f"{enable_package} has been enabled")
+    
 
-    def gpg_key(self, key_ids):
-        self.key_ids = key_ids
+    def gpg_key(self):
         for key_id in key_ids:
             check_key = subprocess.run(["gpg", "--recv-key", key_id], capture_output=True, text=True)
             if check_key.returncode == 0:
@@ -83,16 +80,3 @@ class AurArchLinux:
             else:
                 subprocess.run(["gpg", "--recv-key", key_id])
 
-
-if __name__ == '__main__':
-
-    # key_id = ["662E3CDD6FE329002D0CA5BB40339DD82B12EF16"]    # Librewolf key
-    aur = AurArchLinux()
-     
-    # aur.gpg_key(key_id)
-    # aur.install_aur_packages()
-
-    # enable_packages = ["preload", "acpi", "powertop"]
-    # aur.enable_service(enable_packages)
-    
-    

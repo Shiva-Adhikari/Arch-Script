@@ -12,5 +12,3 @@ class PacmanConf:
         for line in lines:
             subprocess.run(["sudo", "bash", "-c", f"echo '{line}' >> /etc/pacman.conf"])
 
-if __name__ == '__main__':
-    pacmanconf = PacmanConf()

@@ -27,8 +27,3 @@ class NextDns():
         subprocess.run(["sudo", "journalctl", "-u", "nextdns"])
         print("Done")
 
-if __name__ == "__main__":    
-    
-
-    nextdns = NextDns()
-    # nextdns.next_dns()

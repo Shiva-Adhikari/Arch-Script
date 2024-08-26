@@ -1,5 +1,5 @@
 import subprocess
-class PackageManager:
+class Uninstall:
     def __init__(self):
         self.packages = ["gnome-maps", "gnome-music", "gnome-tour", "gnome-weather"]
 
@@ -14,7 +14,3 @@ class PackageManager:
             else:
                 print(f"{package} is already Removed.")
 
-
-if __name__ == "__main__":
-    package_manager = PackageManager()
-    package_manager.remove_packages()

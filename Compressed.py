@@ -14,9 +14,3 @@ class Compressed():
         subprocess.run(["chmod", "+x", "xampp-linux-x64-8.2.12-0-installer.run"])
         subprocess.run(["sudo", "./xampp-linux-x64-8.2.12-0-installer.run"])
 
-if __name__ == "__main__":
-    compressed = Compressed()
-    compressed.file()
-
-    
-    

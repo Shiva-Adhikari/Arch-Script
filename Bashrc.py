@@ -1,25 +1,8 @@
 import subprocess
 
 class Bashrc:
-    # def __init__(self,aliases):
-        # pass
-
-
-    def add_aliases(self,aliases):
-        self.aliases = aliases
-# Backup the existing .bashrc file
-        subprocess.run(["sudo", "tar", "-cvf", "/home/lx/.bashrc.tar.gz", "-P", "/home/lx/.bashrc"])
-
-# Append aliases to the .bashrc file
-        with open("/home/lx/.bashrc", "a") as f:
-            f.write("\n## Added by lx\n")
-
-            for alias, command in self.aliases.items():
-                f.write(f"alias {alias}='{command}'\n")
-
-
-if __name__ == '__main__':
-    aliases = {
+    def __init__(self):
+        self.aliases = {
             "p": "paru",
             "s": "sensors",
             "py": "python",
@@ -33,6 +16,16 @@ if __name__ == '__main__':
             "activate": "source ~/.venv/bin/activate",
             "xampp": "cd /opt/lampp/ && sudo ./manager-linux-x64.run",
             }
-    
-    bashrc = Bashrc()
-    bashrc.add_aliases(aliases)
+
+
+    def add_aliases(self):
+# Backup the existing .bashrc file
+        subprocess.run(["sudo", "tar", "-cvf", "/home/lx/.bashrc.tar.gz", "-P", "/home/lx/.bashrc"])
+
+# Append aliases to the .bashrc file
+        with open("/home/lx/.bashrc", "a") as f:
+            f.write("\n## Added by lx\n")
+
+            for alias, command in self.aliases.items():
+                f.write(f"alias {alias}='{command}'\n")
+
