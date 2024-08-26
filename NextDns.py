@@ -1,5 +1,5 @@
 import subprocess
-#import AurArchLinux
+import AurArchLinux
 
 class NextDns():
     def next_dns(self):
@@ -22,9 +22,9 @@ class NextDns():
         print("Done")
 
 if __name__ == "__main__":    
-    #aur_packages = { "nextdns-bin": "https://aur.archlinux.org/nextdns-bin.git" }
-    #aur = AurArchLinux.AurArchLinux()
-    #aur.install_aur_packages(aur_packages)
+    aur_packages = { "nextdns-bin": "https://aur.archlinux.org/nextdns-bin.git" }
+    aur = AurArchLinux.AurArchLinux()
+    aur.install_aur_packages(aur_packages)
 
     nextdns = NextDns()
     nextdns.next_dns()
