@@ -9,17 +9,23 @@ class AurArchLinux:
         print(f"Installing Aur packages...")
 
         for package_name, package_id in self.aur_packages.items():
-            print(f"installing {package_name}")
+
+            query = subprocess.run(["pacman", "-Qq", package_name], capture_output=True, text=True)
+            if query.returncode == 0:
+                print(f"{package_name} already installed, skipping...")
+                continue
 
             git_check = subprocess.run(["ls", package_name], capture_output=True, text=True)
             if git_check.returncode == 0:
                 os.chdir(package_name)
             else:
                 subprocess.run(["git", "clone", package_id])
+                os.chdir(package_name)
 
             makepkg = subprocess.run(["ls", "PKGBUILD"], capture_output=True, text=True)
             if makepkg.returncode == 0:
                 subprocess.run(["makepkg", "-si"])
+                pass
 
             if package_name == "gnome-dash-fix":
                 bashinstall = subprocess.run(["ls", "appfixer.sh"], capture_output=True, text=True)
@@ -53,8 +59,8 @@ class AurArchLinux:
 if __name__ == '__main__':
     aur_packages = {
         "paru-bin": "https://aur.archlinux.org/paru-bin.git",
-        "gnome-shell-extension-clipboard-indicator": "https://aur.archlinux.org/"
-        "gnome-shell-extension-clipboard-indicator.git",
+        "text-engine": "https://aur.archlinux.org/text-engine.git",
+        "gnome-shell-extension-clipboard-indicator": "https://aur.archlinux.org/gnome-shell-extension-clipboard-indicator.git",
         "gnome-dash-fix": "https://github.com/BenJetson/gnome-dash-fix.git",
         "caprine": "https://aur.archlinux.org/caprine.git",
         "whatsie": "https://aur.archlinux.org/whatsie.git",
@@ -68,15 +74,15 @@ if __name__ == '__main__':
         "logseq-desktop-bin": "https://aur.archlinux.org/logseq-desktop-bin.git",
     }
 
-    # packages = ["dnsmasq", "hostapd"]
-    # package_manager = PackageManager.PackageManager()
-    # package_manager.install_packages(packages)
-# 
-    # key_id = ["662E3CDD6FE329002D0CA5BB40339DD82B12EF16"]    # Librewolf key
+    packages = ["dnsmasq", "hostapd"]
+    package_manager = PackageManager.PackageManager()
+    package_manager.install_packages(packages)
+
+    key_id = ["662E3CDD6FE329002D0CA5BB40339DD82B12EF16"]    # Librewolf key
     aur = AurArchLinux()
-    # 
-    # aur.gpg_key(key_id)
-    # aur.install_aur_packages(aur_packages)
+     
+    aur.gpg_key(key_id)
+    aur.install_aur_packages(aur_packages)
 
     enable_packages = ["preload", "acpi", "powertop"]
     aur.enable_service(enable_packages)
