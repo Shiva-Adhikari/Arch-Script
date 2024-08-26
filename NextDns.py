@@ -2,6 +2,12 @@ import subprocess
 import AurArchLinux
 
 class NextDns():
+    def __init__(self):
+        self.aur_packages = { "nextdns-bin": "https://aur.archlinux.org/nextdns-bin.git" }
+        self.aur = AurArchLinux.AurArchLinux()
+        self.aur.aur_packages = self.aur_packages
+        self.aur.install_aur_packages()
+
     def next_dns(self):
         subprocess.run(["sudo", "nextdns", "install", "-profile", "e61fac", "-report-client-info", "-auto-activate"])
         subprocess.run(["sudo", "systemctl", "enable", "nextdns"])
@@ -22,9 +28,7 @@ class NextDns():
         print("Done")
 
 if __name__ == "__main__":    
-    aur_packages = { "nextdns-bin": "https://aur.archlinux.org/nextdns-bin.git" }
-    aur = AurArchLinux.AurArchLinux()
-    aur.install_aur_packages(aur_packages)
+    
 
     nextdns = NextDns()
-    nextdns.next_dns()
+    # nextdns.next_dns()

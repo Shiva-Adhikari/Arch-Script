@@ -1,7 +1,10 @@
 import subprocess
 
 class Bashrc:
-    
+    # def __init__(self,aliases):
+        # pass
+
+
     def add_aliases(self,aliases):
         self.aliases = aliases
 # Backup the existing .bashrc file
@@ -29,7 +32,7 @@ if __name__ == '__main__':
             "..": "sudo create_ap wlan0 wlan0 ..",
             "activate": "source ~/.venv/bin/activate",
             "xampp": "cd /opt/lampp/ && sudo ./manager-linux-x64.run",
-        }
+            }
     
     bashrc = Bashrc()
     bashrc.add_aliases(aliases)

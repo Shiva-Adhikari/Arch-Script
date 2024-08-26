@@ -1,7 +1,9 @@
 import subprocess
 class PackageManager:
-    def remove_packages(self, packages):
-        self.packages = packages
+    def __init__(self):
+        self.packages = ["gnome-maps", "gnome-music", "gnome-tour", "gnome-weather"]
+
+    def remove_packages(self):
         print("Removing packages using Pacman...")
         for package in self.packages:
             result = subprocess.run(["pacman", "-Qq", package], capture_output=True, text=True)
@@ -12,8 +14,7 @@ class PackageManager:
             else:
                 print(f"{package} is already Removed.")
 
-if __name__ == '__main__':
-    pacman_packages = ["gnome-maps", "gnome-music", "gnome-tour", "gnome-weather"]
-    
+
+if __name__ == "__main__":
     package_manager = PackageManager()
-    package_manager.remove_packages(pacman_packages)
+    package_manager.remove_packages()

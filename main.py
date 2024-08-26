@@ -17,7 +17,7 @@ def print_menu():
     print("2. Sudoers")
     print("3. Pacman Conf")
     print("4. Package Manager")
-    print("5. Aur Arch Linux")
+    print("5. Aur Install")
     print("6. Black Arch Installer")
     print("7. ufw Firewall")
     print("8. Uninstall Gnome Apps")
@@ -50,56 +50,54 @@ def main():
         time.sleep(2)
 
         match user_input:
-            case 1:
+            case 1:     # Bashrc
                 import Bashrc
                 # bashrc = Bashrc()
                 # bashrc.add_aliases(aliases)
                 continue
 
-            case 2:
+            case 2:     # Sudoers
                 import Sudoers
                 # sudoers = Sudoers()
                 continue
 
-            case 3:
+            case 3:     # Pacman Conf
                 import PacmanConf
                 # pacmanconf = PacmanConf()
                 continue
 
-            case 4:
+            case 4:     # Package Manager
                 import PackageManager
                 # package_manager = PackageManager()
                 # package_manager.install_packages(pacman_packages)
                 continue
 
-            case 5:
+            case 5:     # Aur Install
                 pass
                 continue
 
-            case 6:
+            case 6:     # Black Arch Installer
                 pass
                 continue
 
-            case 7:
+            case 7:     # ufw Firewall
                 pass
                 continue
 
-            case 8:
+            case 8:     # Uninstall Gnome Apps
                 import PackageManager
-                # pacman_packages = ["gnome-maps", "gnome-music", "gnome-tour", "gnome-weather"]
-                # package_manager = PackageManager.PackageManager()
-                # package_manager.remove_packages(pacman_packages)
+                
                 continue
 
-            case 9:
+            case 9:     # Bluetooth
                 pass
                 continue
 
-            case 10:
+            case 10:    # Compressed
                 pass
                 continue
 
-            case 11:
+            case 11:    # Next Dns Setup
                 pass
                 continue
 
