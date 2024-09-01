@@ -21,7 +21,7 @@ class AurArchLinux:
         "logseq-desktop-bin": "https://aur.archlinux.org/logseq-desktop-bin.git",
         }
 
-        self.key_id = ["662E3CDD6FE329002D0CA5BB40339DD82B12EF16"]    # Librewolf key
+        self.key_ids = ["662E3CDD6FE329002D0CA5BB40339DD82B12EF16"]    # Librewolf key
 
         self.packages = ["dnsmasq", "hostapd"]
         self.package_manager = PackageManager.PackageManager()
@@ -59,13 +59,12 @@ class AurArchLinux:
             makepkg = subprocess.run(["ls", "PKGBUILD"], capture_output=True, text=True)
             if makepkg.returncode == 0:
                 subprocess.run(["makepkg", "-si"])
-                pass
-
-            if package_name == "gnome-dash-fix":
-                bashinstall = subprocess.run(["ls", "appfixer.sh"], capture_output=True, text=True)
-                if bashinstall.returncode == 0:
-                    subprocess.run(["chmod", "+x", "appfixer.sh"])
-                    subprocess.run(["bash", "appfixer.sh"])
+            else:
+                if package_name == "gnome-dash-fix":
+                    bashinstall = subprocess.run(["ls", "appfixer.sh"], capture_output=True, text=True)
+                    if bashinstall.returncode == 0:
+                        subprocess.run(["chmod", "+x", "appfixer.sh"])
+                        subprocess.run(["bash", "appfixer.sh"])
                 
             os.chdir("..")
             subprocess.run(["rm","-rf",package_name])
@@ -73,7 +72,7 @@ class AurArchLinux:
     
 
     def gpg_key(self):
-        for key_id in key_ids:
+        for key_id in self.key_ids:
             check_key = subprocess.run(["gpg", "--recv-key", key_id], capture_output=True, text=True)
             if check_key.returncode == 0:
                 print("Already Added gpg key")
