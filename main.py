@@ -1,15 +1,16 @@
+# Built in Module
 import os
 import time
 
+
 def print_header():
-# clear
     os.system("clear")
-# print *****
     for _ in range(2):
-        print("*" * 12 ,end="")
+        print("*" * 12, end="")
         if _ == 0:
             print("Arch Script", end="")
     print("\n")
+
 
 def print_menu():
     # print("\n")
@@ -27,33 +28,26 @@ def print_menu():
     print("12. Flathub Manager")
     print("0. exit\n")
 
+
 def main():
-# pause
     i = 0
     while True:
         if i == 1:
             input("Press Any Key...")
 
-# call function
         print_header()
         print_menu()
-# user input
         user_input = input("Enter Input... ")
         if user_input.isdecimal():
-# convert to decimal
             user_input = int(user_input)
-# 0 = exit
             if user_input == 0:
                 exit()
-# greater than 12
             if user_input > 12:
                 print("Input Between 1 to 12")
                 time.sleep(2)
-# skip
                 continue
         else:
             print("\nPlease Enter a Number")
-# time sleep
         time.sleep(2)
 
         match user_input:
@@ -66,13 +60,13 @@ def main():
 
             case 2:     # Sudoers
                 import Sudoers
-                sudoers = Sudoers.Sudoers()
+                Sudoers.Sudoers()
                 i = 1
                 continue
 
             case 3:     # Pacman Conf
                 import PacmanConf
-                pacmanconf = PacmanConf.PacmanConf()
+                PacmanConf.PacmanConf()
                 i = 1
                 continue
 
@@ -101,7 +95,7 @@ def main():
 
             case 7:     # ufw Firewall
                 import Ufw
-                ufw = Ufw.Ufw()
+                Ufw.Ufw()
                 i = 1
                 continue
 
@@ -114,7 +108,7 @@ def main():
 
             case 9:     # Bluetooth
                 import Bluetooth
-                bluetooth = Bluetooth.Bluetooth()
+                Bluetooth.Bluetooth()
                 i = 1
                 continue
 
@@ -141,16 +135,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
