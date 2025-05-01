@@ -1,5 +1,9 @@
+# Third party Module
 import subprocess
+
+# Local Module
 import PackageManager
+
 
 class Ufw:
     def __init__(self):
@@ -12,4 +16,3 @@ class Ufw:
         self.package_manager = PackageManager.PackageManager()
         self.package_manager.enable_packages = self.packages
         self.package_manager.enable_service()
-

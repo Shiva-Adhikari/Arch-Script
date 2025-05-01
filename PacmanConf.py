@@ -1,4 +1,7 @@
+# Third party Module
 import subprocess
+
+
 class PacmanConf:
     def __init__(self):
         lines = [
@@ -10,5 +13,5 @@ class PacmanConf:
             "Color"
         ]
         for line in lines:
-            subprocess.run(["sudo", "bash", "-c", f"echo '{line}' >> /etc/pacman.conf"])
-
+            subprocess.run(
+                ["sudo", "bash", "-c", f"echo '{line}' >> /etc/pacman.conf"])

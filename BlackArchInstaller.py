@@ -1,4 +1,6 @@
+# Third party Module
 import subprocess
+
 
 class BlackArchInstaller:
     def install_black_arch(self):
@@ -13,4 +15,3 @@ class BlackArchInstaller:
             subprocess.run(["chmod", "+x", "strap.sh"])
             subprocess.run(["sudo", "./strap.sh"])
             subprocess.run(["rm", "-rf", "strap.sh"])
-

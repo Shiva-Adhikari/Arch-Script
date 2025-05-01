@@ -1,4 +1,6 @@
+# Third party Module
 import subprocess
+
 
 class Sudoers:
     def __init__(self):
@@ -8,4 +10,5 @@ class Sudoers:
             "lx ALL=(ALL:ALL) NOPASSWD: ALL",
         ]
         for line in lines:
-            subprocess.run(["sudo", "bash", "-c", f"echo '{line}' >> /etc/sudoers"])
+            subprocess.run(
+                ["sudo", "bash", "-c", f"echo '{line}' >> /etc/sudoers"])

@@ -1,7 +1,24 @@
+# Third party Module
 import subprocess
+
+
 class PackageManager:
     def __init__(self):
-        self.packages = ["timeshift", "celluloid", "git", "gnome-boxes", "hostapd", "iw", "flatpak", "man", "neofetch", "p7zip", "rsync", "git", "htop", "exfat-utils", "fuse-exfat", "ntfs-3g", "flac", "jasper", "aria2", "curl", "wget", "jdk-openjdk", "intel-ucode", "base-devel", "android-tools", "acpi", "cmake", "cython", "dkms", "linux-headers", "dosfstools", "thunar", "python-pyinotify", "plocate", "inetutils", "libxcrypt-compat", "net-tools", "python-pipx", "keepassxc", "qbittorrent", "signal-desktop", "php", "gedit", "aircrack-ng", "macchanger", "yt-dlp", "jupyter-notebook", "python-scikit-learn", "python-pandas", "python-seaborn", "ffmpeg", "reflector", "noto-fonts", "hddtemp", "obs-studio", "gnome-shell-extension-dash-to-panel", "acpid", "dnsmasq","mokutil", "libreoffice-fresh", "powertop", "virtualbox-host-dkms", "virtualbox-guest-iso",
+        self.packages = [
+            "timeshift", "celluloid", "git", "gnome-boxes", "hostapd", "iw",
+            "flatpak", "man", "neofetch", "p7zip", "rsync", "git", "htop",
+            "exfat-utils", "fuse-exfat", "ntfs-3g", "flac", "jasper", "aria2",
+            "curl", "wget", "jdk-openjdk", "intel-ucode", "base-devel",
+            "android-tools", "acpi", "cmake", "cython", "dkms",
+            "linux-headers", "dosfstools", "thunar", "python-pyinotify",
+            "plocate", "inetutils", "libxcrypt-compat", "net-tools",
+            "python-pipx", "keepassxc", "qbittorrent", "signal-desktop",
+            "php", "gedit", "aircrack-ng", "macchanger", "yt-dlp",
+            "jupyter-notebook", "python-scikit-learn", "python-pandas",
+            "python-seaborn", "ffmpeg", "reflector", "noto-fonts", "hddtemp",
+            "obs-studio", "gnome-shell-extension-dash-to-panel", "acpid",
+            "dnsmasq", "mokutil", "libreoffice-fresh", "powertop",
+            "virtualbox-host-dkms", "virtualbox-guest-iso"
         ]
 
         self.enable_packages = ["acpi", "powertop"]
@@ -21,9 +38,9 @@ class PackageManager:
                 print(f"{package} already installed.")
 
     def enable_service(self):
-# first check status if not enable run this program
+        # first check status if not enable run this program
         for enable_package in self.enable_packages:
-## solve this line no. 14 ( double function (look down))
+            # # solve this line no. 14 ( double function (look down))
             result = subprocess.run(["pacman", "-Qq", enable_package], capture_output=True, text=True)
             if result.returncode == 0:
                 status = subprocess.run(["systemctl", "is-enabled", enable_package], capture_output=True, text=True)

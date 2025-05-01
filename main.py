@@ -1,136 +1,100 @@
 # Built in Module
 import os
-import time
+import click
 
 
-def print_header():
+# display ***** in top
+def header():
     os.system("clear")
     for _ in range(2):
-        print("*" * 12, end="")
+        click.echo("*" * 12)
         if _ == 0:
-            print("Arch Script", end="")
-    print("\n")
+            click.echo("Arch Script")
+    click.echo("\n")
 
 
-def print_menu():
-    # print("\n")
-    print("1. Bashrc")
-    print("2. Sudoers")
-    print("3. Pacman Conf")
-    print("4. Package Manager")
-    print("5. Aur Arch Linux")
-    print("6. Black Arch Installer")
-    print("7. ufw Firewall")
-    print("8. Uninstall Gnome Apps")
-    print("9. Bluetooth")
-    print("10. Compressed ( Xampp )")
-    print("11. Next Dns Setup")
-    print("12. Flathub Manager")
-    print("0. exit\n")
+def menu():
+    click.echo("1. Bashrc")
+    click.echo("2. Sudoers")
+    click.echo("3. Pacman Conf")
+    click.echo("4. Package Manager")
+    click.echo("5. Aur Arch Linux")
+    click.echo("6. Black Arch Installer")
+    click.echo("7. ufw Firewall")
+    click.echo("8. Uninstall Gnome Apps")
+    click.echo("9. Bluetooth")
+    click.echo("10. Compressed ( Xampp )")
+    click.echo("11. Next Dns Setup")
+    click.echo("12. Flathub Manager")
+    click.echo("0. exit\n")
 
 
 def main():
-    i = 0
-    while True:
-        if i == 1:
-            input("Press Any Key...")
+    header()
+    menu()
 
-        print_header()
-        print_menu()
-        user_input = input("Enter Input... ")
-        if user_input.isdecimal():
-            user_input = int(user_input)
-            if user_input == 0:
-                exit()
-            if user_input > 12:
-                print("Input Between 1 to 12")
-                time.sleep(2)
-                continue
-        else:
-            print("\nPlease Enter a Number")
-        time.sleep(2)
+    user_input = click.prompt("Enter Input", type=click.IntRange(0, 12))
+    match user_input:
+        case 0:
+            exit()
 
-        match user_input:
-            case 1:     # Bashrc
-                import Bashrc
-                bashrc = Bashrc.Bashrc()
-                bashrc.add_aliases()
-                i = 1
-                continue
+        case 1:
+            import Bashrc
+            bashrc = Bashrc.Bashrc()
+            bashrc.add_aliases()
 
-            case 2:     # Sudoers
-                import Sudoers
-                Sudoers.Sudoers()
-                i = 1
-                continue
+        case 2:
+            import Sudoers
+            Sudoers.Sudoers()
 
-            case 3:     # Pacman Conf
-                import PacmanConf
-                PacmanConf.PacmanConf()
-                i = 1
-                continue
+        case 3:
+            import PacmanConf
+            PacmanConf.PacmanConf()
 
-            case 4:     # Package Manager
-                import PackageManager
-                package_manager = PackageManager.PackageManager()
-                package_manager.install_packages()
-                package_manager.enable_service()
-                i = 1
-                continue
+        case 4:
+            import PackageManager
+            package_manager = PackageManager.PackageManager()
+            package_manager.install_packages()
+            package_manager.enable_service()
 
-            case 5:     # Aur Arch Linux
-                import AurArchLinux
-                aur = AurArchLinux.AurArchLinux()
-                aur.gpg_key()
-                aur.install_aur_packages()
-                i = 1
-                continue
+        case 5:
+            import AurArchLinux
+            aur = AurArchLinux.AurArchLinux()
+            aur.gpg_key()
+            aur.install_aur_packages()
 
-            case 6:     # Black Arch Installer
-                import BlackArchInstaller
-                black_arch_installer = BlackArchInstaller.BlackArchInstaller()
-                black_arch_installer.install_black_arch()
-                i = 1
-                continue
+        case 6:
+            import BlackArchInstaller
+            black_arch_installer = BlackArchInstaller.BlackArchInstaller()
+            black_arch_installer.install_black_arch()
 
-            case 7:     # ufw Firewall
-                import Ufw
-                Ufw.Ufw()
-                i = 1
-                continue
+        case 7:
+            import Ufw
+            Ufw.Ufw()
 
-            case 8:     # Uninstall Gnome Apps
-                import Uninstall
-                package_manager = Uninstall.Uninstall()
-                package_manager.remove_packages()
-                i = 1
-                continue
+        case 8:     # Uninstall Gnome Apps
+            import Uninstall
+            package_manager = Uninstall.Uninstall()
+            package_manager.remove_packages()
 
-            case 9:     # Bluetooth
-                import Bluetooth
-                Bluetooth.Bluetooth()
-                i = 1
-                continue
+        case 9:
+            import Bluetooth
+            Bluetooth.Bluetooth()
 
-            case 10:    # Compressed
-                import Compressed
-                compressed = Compressed.Compressed()
-                compressed.file()
-                i = 1
-                continue
+        case 10:
+            import Compressed
+            compressed = Compressed.Compressed()
+            compressed.file()
 
-            case 11:    # Next Dns Setup
-                import NextDns
-                nextdns = NextDns.NextDns()
-                nextdns.next_dns()
-                i = 1
-                continue
+        case 11:
+            import NextDns
+            nextdns = NextDns.NextDns()
+            nextdns.next_dns()
 
-            case 12:    # Flathub Manager
-                import FlathubManager
-                flathub_manager = FlathubManager.FlathubManager()
-                flathub_manager.install_flathub_packages()
-                i = 1
+        case 12:
+            import FlathubManager
+            flathub_manager = FlathubManager.FlathubManager()
+            flathub_manager.install_flathub_packages()
 
 
 if __name__ == "__main__":
