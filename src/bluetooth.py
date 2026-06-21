@@ -1,21 +1,23 @@
-# Third party Module
+# Built in Module
 import subprocess
 
 # Local Module
-import PackageManager
+from base import Base
+from package_manager import PackageManager
 
 
-class Bluetooth():
+class Bluetooth(Base):
     def __init__(self):
-        # install package
         self.packages = ["bluez", "blueman", "bluez-utils"]
-        self.package_manager = PackageManager.PackageManager()
-        self.package_manager.packages = self.packages
-        self.package_manager.install_packages()
-        # add
+        self.services = ["bluetooth"]
+
+    def run(self):
+        pm = PackageManager()
+        pm.packages = self.packages
+        pm.install_packages()
+
         subprocess.run(["sudo", "modprobe", "btusb"])
 
-        self.package = ["bluetooth"]
-        self.package_manager = PackageManager.PackageManager()
-        self.package_manager.enable_packages = self.package
-        self.package_manager.enable_service()
+        pm = PackageManager()
+        pm.enable_packages = self.services
+        pm.enable_service()

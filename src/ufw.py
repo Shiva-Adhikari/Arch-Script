@@ -1,18 +1,18 @@
-# Third party Module
-import subprocess
-
 # Local Module
-import PackageManager
+from base import Base
+from package_manager import PackageManager
 
 
-class Ufw:
+class Ufw(Base):
     def __init__(self):
-        self.package = ["ufw"]
-        self.package_manager = PackageManager.PackageManager()
-        self.package_manager.packages = self.package
-        self.package_manager.install_packages()
-
         self.packages = ["ufw"]
-        self.package_manager = PackageManager.PackageManager()
-        self.package_manager.enable_packages = self.packages
-        self.package_manager.enable_service()
+        self.services = ["ufw"]
+
+    def run(self):
+        pm = PackageManager()
+        pm.packages = self.packages
+        pm.install_packages()
+
+        pm = PackageManager()
+        pm.enable_packages = self.services
+        pm.enable_service()

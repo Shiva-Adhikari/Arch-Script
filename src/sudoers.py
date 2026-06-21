@@ -1,14 +1,22 @@
-# Third party Module
+# Built in Module
+import os
 import subprocess
 
+# Local Module
+from base import Base
 
-class Sudoers:
+
+class Sudoers(Base):
     def __init__(self):
+        self.username = os.getenv("USER") or os.getenv("LOGNAME")
+        self.sudoers_path = "/etc/sudoers"
+
+    def run(self):
+        print(f"Adding {self.username} to sudoers...")
         lines = [
-            "\n"
-            "##Bypass SUDO by lx",
-            "lx ALL=(ALL:ALL) NOPASSWD: ALL",
+            f"\n##Bypass SUDO by {self.username}",
+            f"{self.username} ALL=(ALL:ALL) NOPASSWD: ALL",
         ]
         for line in lines:
-            subprocess.run(
-                ["sudo", "bash", "-c", f"echo '{line}' >> /etc/sudoers"])
+            subprocess.run(["sudo", "bash", "-c", f"echo '{line}' >> {self.sudoers_path}"])
+        print("Done.")

@@ -1,12 +1,15 @@
-# Third party Module
+# Built in Module
 import subprocess
 
+# Local Module
+from base import Base
 
-class PackageManager:
+
+class PackageManager(Base):
     def __init__(self):
         self.packages = [
             "timeshift", "celluloid", "git", "gnome-boxes", "hostapd", "iw",
-            "flatpak", "man", "neofetch", "p7zip", "rsync", "git", "htop",
+            "flatpak", "man", "neofetch", "p7zip", "rsync", "htop",
             "exfat-utils", "fuse-exfat", "ntfs-3g", "flac", "jasper", "aria2",
             "curl", "wget", "jdk-openjdk", "intel-ucode", "base-devel",
             "android-tools", "acpi", "cmake", "cython", "dkms",
@@ -20,16 +23,16 @@ class PackageManager:
             "dnsmasq", "mokutil", "libreoffice-fresh", "powertop",
             "virtualbox-host-dkms", "virtualbox-guest-iso"
         ]
+        self.enable_packages = ["acpid", "powertop"]
 
-        self.enable_packages = ["acpi", "powertop"]
+    def run(self):
+        self.install_packages()
+        self.enable_service()
 
     def install_packages(self):
-        # self.packages = packages
         print("Installing packages using Pacman...")
-
         for package in self.packages:
-            result = subprocess.run(["pacman", "-Qq", package], capture_output=True, text=True)
-
+            result = self._run_cmd(["pacman", "-Qq", package])
             if result.returncode != 0:
                 subprocess.run("clear")
                 print(f"Installing {package}...")
@@ -38,16 +41,10 @@ class PackageManager:
                 print(f"{package} already installed.")
 
     def enable_service(self):
-        # first check status if not enable run this program
-        for enable_package in self.enable_packages:
-            # # solve this line no. 14 ( double function (look down))
-            result = subprocess.run(["pacman", "-Qq", enable_package], capture_output=True, text=True)
+        for package in self.enable_packages:
+            result = self._run_cmd(["systemctl", "is-enabled", package])
             if result.returncode == 0:
-                status = subprocess.run(["systemctl", "is-enabled", enable_package], capture_output=True, text=True)
-                if status.returncode == 0:
-                    print(f"{enable_package} already enabled")
-                else:
-                    subprocess.run(["sudo", "systemctl", "enable", enable_package])
-                    print(f"{enable_package} has been enabled")
+                print(f"{package} already enabled.")
             else:
-                print("Please install f{enable_package} first")
+                print(f"Enabling {package}...")
+                subprocess.run(["sudo", "systemctl", "enable", "--now", package])

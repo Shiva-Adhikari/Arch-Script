@@ -2,8 +2,19 @@
 import os
 import click
 
+# Local Module
+from bashrc import Bashrc
+from sudoers import Sudoers
+from pacman_conf import PacmanConf
+from package_manager import PackageManager
+from aur_package import AurPackage
+from blackarch import BlackArch
+from ufw import Ufw
+from uninstall import Uninstall
+from bluetooth import Bluetooth
+from flathub import Flathub
 
-# display ***** in top
+
 def header():
     os.system("clear")
     for _ in range(2):
@@ -14,87 +25,47 @@ def header():
 
 
 def menu():
-    click.echo("1. Bashrc")
-    click.echo("2. Sudoers")
-    click.echo("3. Pacman Conf")
-    click.echo("4. Package Manager")
-    click.echo("5. Aur Arch Linux")
-    click.echo("6. Black Arch Installer")
-    click.echo("7. ufw Firewall")
-    click.echo("8. Uninstall Gnome Apps")
-    click.echo("9. Bluetooth")
-    click.echo("10. Compressed ( Xampp )")
-    click.echo("11. Next Dns Setup")
-    click.echo("12. Flathub Manager")
-    click.echo("0. exit\n")
+    click.echo("1.  Bashrc")
+    click.echo("2.  Sudoers")
+    click.echo("3.  Pacman Conf")
+    click.echo("4.  Package Manager")
+    click.echo("5.  AUR Packages")
+    click.echo("6.  BlackArch Installer")
+    click.echo("7.  UFW Firewall")
+    click.echo("8.  Uninstall Gnome Apps")
+    click.echo("9.  Bluetooth")
+    click.echo("10. Flathub Manager")
+    click.echo("0.  Exit\n")
 
 
 def main():
     header()
     menu()
 
-    user_input = click.prompt("Enter Input", type=click.IntRange(0, 12))
+    user_input = click.prompt("Enter Input", type=click.IntRange(0, 10))
     match user_input:
         case 0:
             exit()
-
         case 1:
-            import Bashrc
-            bashrc = Bashrc.Bashrc()
-            bashrc.add_aliases()
-
+            Bashrc().run()
         case 2:
-            import Sudoers
-            Sudoers.Sudoers()
-
+            Sudoers().run()
         case 3:
-            import PacmanConf
-            PacmanConf.PacmanConf()
-
+            PacmanConf().run()
         case 4:
-            import PackageManager
-            package_manager = PackageManager.PackageManager()
-            package_manager.install_packages()
-            package_manager.enable_service()
-
+            PackageManager().run()
         case 5:
-            import AurArchLinux
-            aur = AurArchLinux.AurArchLinux()
-            aur.gpg_key()
-            aur.install_aur_packages()
-
+            AurPackage().run()
         case 6:
-            import BlackArchInstaller
-            black_arch_installer = BlackArchInstaller.BlackArchInstaller()
-            black_arch_installer.install_black_arch()
-
+            BlackArch().run()
         case 7:
-            import Ufw
-            Ufw.Ufw()
-
-        case 8:     # Uninstall Gnome Apps
-            import Uninstall
-            package_manager = Uninstall.Uninstall()
-            package_manager.remove_packages()
-
+            Ufw().run()
+        case 8:
+            Uninstall().run()
         case 9:
-            import Bluetooth
-            Bluetooth.Bluetooth()
-
+            Bluetooth().run()
         case 10:
-            import Compressed
-            compressed = Compressed.Compressed()
-            compressed.file()
-
-        case 11:
-            import NextDns
-            nextdns = NextDns.NextDns()
-            nextdns.next_dns()
-
-        case 12:
-            import FlathubManager
-            flathub_manager = FlathubManager.FlathubManager()
-            flathub_manager.install_flathub_packages()
+            Flathub().run()
 
 
 if __name__ == "__main__":

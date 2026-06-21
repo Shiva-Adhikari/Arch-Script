@@ -1,29 +1,43 @@
-AurArchLinux.py # Third party Module
+# Built in Module
+import os
 import subprocess
 
+# Local Module
+from base import Base
 
-class Bashrc:
+
+class Bashrc(Base):
     def __init__(self):
+        self.username = os.getenv("USER") or os.getenv("LOGNAME")
+        self.home = os.path.expanduser("~")
+        self.bashrc_path = f"{self.home}/.bashrc"
+
         self.aliases = {
-            "s": "sensors",
-            "py": "python",
-            "search": "pacman -Ss",
-            "install": "sudo pacman -S",
-            "remove": "sudo pacman -Rcsun",
-            "update": "sudo pacman -Sy",
+            "s":        "sensors",
+            "py":       "python",
+            "search":   "pacman -Ss",
+            "install":  "sudo pacman -S",
+            "remove":   "sudo pacman -Rcsun",
+            "update":   "sudo pacman -Sy",
             "notebook": "jupyter-notebook",
-            "..": "sudo create_ap wlan0 wlan0 wifi password",
             "activate": "source ~/.venv/bin/activate",
-            "xampp": "cd /opt/lampp/ && sudo ./manager-linux-x64.run",
-            }
+        }
 
-    def add_aliases(self):
-        # Backup the existing .bashrc file
-        subprocess.run(["sudo", "tar", "-cvf", "/home/lx/.bashrc.tar.gz", "-P", "/home/lx/.bashrc"])
+    def run(self):
+        self._backup()
+        self._add_aliases()
 
-        # Append aliases to the .bashrc file
-        with open("/home/lx/.bashrc", "a") as f:
-            f.write("\n## Added by lx\n")
+    def _backup(self):
+        print("Backing up .bashrc...")
+        subprocess.run([
+            "tar", "-cvf", f"{self.home}/.bashrc.tar.gz",
+            "-P", self.bashrc_path
+        ])
 
+    def _add_aliases(self):
+        print("Adding aliases to .bashrc...")
+        with open(self.bashrc_path, "a") as f:
+            f.write(f"\n## Added by {self.username}\n")
             for alias, command in self.aliases.items():
                 f.write(f"alias {alias}='{command}'\n")
+        print("Done.")

@@ -1,22 +1,23 @@
-# Third party Module
+# Built in Module
 import subprocess
 
+# Local Module
+from base import Base
 
-class Uninstall:
+
+class Uninstall(Base):
     def __init__(self):
         self.packages = [
             "gnome-maps", "gnome-music", "gnome-tour", "gnome-weather"
         ]
 
-    def remove_packages(self):
+    def run(self):
         print("Removing packages using Pacman...")
         for package in self.packages:
-            result = subprocess.run(
-                ["pacman", "-Qq", package], capture_output=True, text=True)
+            result = self._run_cmd(["pacman", "-Qq", package])
             if result.returncode == 0:
                 subprocess.run("clear")
                 print(f"Removing {package}...")
-                subprocess.run(
-                    ["sudo", "pacman", "-Rn", "--noconfirm", package])
+                subprocess.run(["sudo", "pacman", "-Rn", "--noconfirm", package])
             else:
-                print(f"{package} is already Removed.")
+                print(f"{package} is already removed.")
