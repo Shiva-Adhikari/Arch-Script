@@ -1,5 +1,14 @@
 # Built in Module
+import json
+import os
 import subprocess
+
+CONFIG_PATH = os.path.join(os.path.dirname(__file__), "..", "config", "packages.json")
+
+
+def load_config() -> dict:
+    with open(CONFIG_PATH) as f:
+        return json.load(f)
 
 
 class Base:

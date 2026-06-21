@@ -2,16 +2,13 @@
 import subprocess
 
 # Local Module
-from base import Base
+from base import Base, load_config
 
 
 class Flathub(Base):
     def __init__(self):
-        self.packages = {
-            "Telegram":               "org.telegram.desktop",
-            "Teams":                  "com.github.IsmaelMartinez.teams_for_linux",
-            "Ultimate Media Downloader": "com.ktechpit.ultimate-media-downloader",
-        }
+        config = load_config()
+        self.packages = config["flathub"]
 
     def run(self):
         print("Installing Flathub packages using flatpak...")

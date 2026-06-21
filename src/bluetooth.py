@@ -2,14 +2,15 @@
 import subprocess
 
 # Local Module
-from base import Base
+from base import Base, load_config
 from package_manager import PackageManager
 
 
 class Bluetooth(Base):
     def __init__(self):
-        self.packages = ["bluez", "blueman", "bluez-utils"]
-        self.services = ["bluetooth"]
+        config = load_config()
+        self.packages = config["bluetooth"]
+        self.services = config["bluetooth_services"]
 
     def run(self):
         pm = PackageManager()

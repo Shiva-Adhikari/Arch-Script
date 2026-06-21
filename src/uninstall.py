@@ -2,14 +2,13 @@
 import subprocess
 
 # Local Module
-from base import Base
+from base import Base, load_config
 
 
 class Uninstall(Base):
     def __init__(self):
-        self.packages = [
-            "gnome-maps", "gnome-music", "gnome-tour", "gnome-weather"
-        ]
+        config = load_config()
+        self.packages = config["uninstall"]
 
     def run(self):
         print("Removing packages using Pacman...")

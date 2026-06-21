@@ -1,0 +1,66 @@
+{
+    "pacman": [
+        "timeshift", "celluloid", "git", "gnome-boxes", "hostapd", "iw",
+        "flatpak", "man", "neofetch", "p7zip", "rsync", "htop",
+        "exfat-utils", "fuse-exfat", "ntfs-3g", "flac", "jasper", "aria2",
+        "curl", "wget", "jdk-openjdk", "intel-ucode", "base-devel",
+        "android-tools", "acpi", "cmake", "cython", "dkms",
+        "linux-headers", "dosfstools", "thunar", "python-pyinotify",
+        "plocate", "inetutils", "libxcrypt-compat", "net-tools",
+        "python-pipx", "keepassxc", "qbittorrent", "signal-desktop",
+        "php", "gedit", "aircrack-ng", "macchanger", "yt-dlp",
+        "jupyter-notebook", "python-scikit-learn", "python-pandas",
+        "python-seaborn", "ffmpeg", "reflector", "noto-fonts", "hddtemp",
+        "obs-studio", "gnome-shell-extension-dash-to-panel", "acpid",
+        "dnsmasq", "mokutil", "libreoffice-fresh", "powertop",
+        "virtualbox-host-dkms", "virtualbox-guest-iso"
+    ],
+    "pacman_services": [
+        "acpid", "powertop"
+    ],
+    "aur": {
+        "paru-bin":                                     "https://aur.archlinux.org/paru-bin.git",
+        "text-engine":                                  "https://aur.archlinux.org/text-engine.git",
+        "gnome-shell-extension-clipboard-indicator":    "https://aur.archlinux.org/gnome-shell-extension-clipboard-indicator.git",
+        "gnome-dash-fix":                               "https://github.com/BenJetson/gnome-dash-fix.git",
+        "caprine":                                      "https://aur.archlinux.org/caprine.git",
+        "whatsie":                                      "https://aur.archlinux.org/whatsie.git",
+        "ttf-ms-fonts":                                 "https://aur.archlinux.org/ttf-ms-fonts.git",
+        "preload":                                      "https://aur.archlinux.org/preload.git",
+        "linux-wifi-hotspot":                           "https://aur.archlinux.org/linux-wifi-hotspot.git",
+        "auto-cpufreq":                                 "https://aur.archlinux.org/auto-cpufreq.git",
+        "vscodium-bin":                                 "https://aur.archlinux.org/vscodium-bin.git",
+        "librewolf-bin":                                "https://aur.archlinux.org/librewolf-bin.git",
+        "extension-manager":                            "https://aur.archlinux.org/extension-manager.git",
+        "logseq-desktop-bin":                           "https://aur.archlinux.org/logseq-desktop-bin.git"
+    },
+    "aur_dependencies": [
+        "dnsmasq", "hostapd"
+    ],
+    "aur_services": [
+        "preload"
+    ],
+    "aur_gpg_keys": [
+        "662E3CDD6FE329002D0CA5BB40339DD82B12EF16"
+    ],
+    "flathub": {
+        "Telegram":                 "org.telegram.desktop",
+        "Teams":                    "com.github.IsmaelMartinez.teams_for_linux",
+        "Ultimate Media Downloader": "com.ktechpit.ultimate-media-downloader"
+    },
+    "uninstall": [
+        "gnome-maps", "gnome-music", "gnome-tour", "gnome-weather"
+    ],
+    "bluetooth": [
+        "bluez", "blueman", "bluez-utils"
+    ],
+    "bluetooth_services": [
+        "bluetooth"
+    ],
+    "ufw": [
+        "ufw"
+    ],
+    "ufw_services": [
+        "ufw"
+    ]
+}

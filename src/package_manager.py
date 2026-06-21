@@ -2,28 +2,14 @@
 import subprocess
 
 # Local Module
-from base import Base
+from base import Base, load_config
 
 
 class PackageManager(Base):
     def __init__(self):
-        self.packages = [
-            "timeshift", "celluloid", "git", "gnome-boxes", "hostapd", "iw",
-            "flatpak", "man", "neofetch", "p7zip", "rsync", "htop",
-            "exfat-utils", "fuse-exfat", "ntfs-3g", "flac", "jasper", "aria2",
-            "curl", "wget", "jdk-openjdk", "intel-ucode", "base-devel",
-            "android-tools", "acpi", "cmake", "cython", "dkms",
-            "linux-headers", "dosfstools", "thunar", "python-pyinotify",
-            "plocate", "inetutils", "libxcrypt-compat", "net-tools",
-            "python-pipx", "keepassxc", "qbittorrent", "signal-desktop",
-            "php", "gedit", "aircrack-ng", "macchanger", "yt-dlp",
-            "jupyter-notebook", "python-scikit-learn", "python-pandas",
-            "python-seaborn", "ffmpeg", "reflector", "noto-fonts", "hddtemp",
-            "obs-studio", "gnome-shell-extension-dash-to-panel", "acpid",
-            "dnsmasq", "mokutil", "libreoffice-fresh", "powertop",
-            "virtualbox-host-dkms", "virtualbox-guest-iso"
-        ]
-        self.enable_packages = ["acpid", "powertop"]
+        config = load_config()
+        self.packages = config["pacman"]
+        self.enable_packages = config["pacman_services"]
 
     def run(self):
         self.install_packages()
