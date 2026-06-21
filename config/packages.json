@@ -39,9 +39,6 @@
     "aur_services": [
         "preload"
     ],
-    "aur_gpg_keys": [
-        "662E3CDD6FE329002D0CA5BB40339DD82B12EF16"
-    ],
     "flathub": {
         "Telegram":                  "org.telegram.desktop",
         "Teams":                     "com.github.IsmaelMartinez.teams_for_linux",

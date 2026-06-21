@@ -11,14 +11,12 @@ class AurPackage(Base):
     def __init__(self):
         config = load_config()
         self.aur_packages = config["aur"]
-        self.gpg_keys = config["aur_gpg_keys"]
         self.dependencies = config["aur_dependencies"]
         self.services = config["aur_services"]
         self.paru_url = "https://aur.archlinux.org/paru-bin.git"
 
     def run(self):
         self._install_dependencies()
-        self._import_gpg_keys()
         self._install_paru()
         self._install_aur_packages()
         self._enable_services()
@@ -27,11 +25,6 @@ class AurPackage(Base):
         pm = PackageManager()
         pm.packages = self.dependencies
         pm.install_packages()
-
-    def _import_gpg_keys(self):
-        for key in self.gpg_keys:
-            print(f"Importing GPG key: {key}")
-            subprocess.run(["gpg", "--recv-key", key])
 
     def _install_paru(self):
         result = self._run_cmd(["pacman", "-Qq", "paru-bin"])
