@@ -3,7 +3,7 @@ import os
 import subprocess
 
 # Local Module
-from base import Base
+from src.base import Base
 
 
 class BlackArch(Base):

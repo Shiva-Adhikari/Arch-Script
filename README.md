@@ -17,7 +17,7 @@ A post-install automation tool for Arch Linux. Run it after a fresh install to s
 ```bash
 git clone https://github.com/Shiva-Adhikari/Arch-Script.git
 cd Arch-Script
-uv run src/main.py
+uv run main.py
 ```
 
 ---
@@ -81,20 +81,21 @@ All packages and settings live in `config/packages.json`. Edit this file to add 
 ```
 Arch-Script/
 ├── config/
-│   └── packages.json   # all packages and settings
+│   └── packages.json       # all packages and settings
 ├── src/
-│   ├── main.py         # entry point and menu
-│   ├── base.py         # shared base class
-│   ├── bashrc.py       # alias and bashrc management
-│   ├── sudoers.py      # sudoers configuration
-│   ├── pacman_conf.py  # pacman configuration
+│   ├── __init__.py
+│   ├── base.py             # shared base class
+│   ├── bashrc.py           # alias and bashrc management
+│   ├── sudoers.py          # sudoers configuration
+│   ├── pacman_conf.py      # pacman configuration
 │   ├── package_manager.py  # pacman package installer
-│   ├── aur_package.py  # paru and AUR package installer
-│   ├── blackarch.py    # BlackArch repo installer
-│   ├── ufw.py          # firewall setup
-│   ├── uninstall.py    # remove GNOME bloat
-│   ├── bluetooth.py    # bluetooth setup
-│   └── flathub.py      # flatpak app installer
+│   ├── aur_package.py      # paru and AUR package installer
+│   ├── blackarch.py        # BlackArch repo installer
+│   ├── ufw.py              # firewall setup
+│   ├── uninstall.py        # remove GNOME bloat
+│   ├── bluetooth.py        # bluetooth setup
+│   └── flathub.py          # flatpak app installer
+├── main.py                 # entry point and menu
 └── pyproject.toml
 ```
 

@@ -3,8 +3,8 @@ import os
 import subprocess
 
 # Local Module
-from base import Base, load_config
-from package_manager import PackageManager
+from src.base import Base, load_config
+from src.package_manager import PackageManager
 
 
 class AurPackage(Base):

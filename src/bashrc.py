@@ -3,7 +3,7 @@ import os
 import subprocess
 
 # Local Module
-from base import Base, load_config
+from src.base import Base, load_config
 
 
 class Bashrc(Base):

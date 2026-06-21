@@ -3,16 +3,16 @@ import os
 import click
 
 # Local Module
-from bashrc import Bashrc
-from sudoers import Sudoers
-from pacman_conf import PacmanConf
-from package_manager import PackageManager
-from aur_package import AurPackage
-from blackarch import BlackArch
-from ufw import Ufw
-from uninstall import Uninstall
-from bluetooth import Bluetooth
-from flathub import Flathub
+from src.bashrc import Bashrc
+from src.sudoers import Sudoers
+from src.pacman_conf import PacmanConf
+from src.package_manager import PackageManager
+from src.aur_package import AurPackage
+from src.blackarch import BlackArch
+from src.ufw import Ufw
+from src.uninstall import Uninstall
+from src.bluetooth import Bluetooth
+from src.flathub import Flathub
 
 
 def header():
