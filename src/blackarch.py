@@ -1,27 +1,41 @@
 # Built in Module
 import os
 import subprocess
+import tempfile
 
 # Local Module
-from src.base import Base
+from src.base import Base, logger
 
 
 class BlackArch(Base):
     def __init__(self):
         self.mirrorlist = "/etc/pacman.d/blackarch-mirrorlist"
         self.strap_url = "https://blackarch.org/strap.sh"
-        self.strap_file = "strap.sh"
 
     def run(self):
         if os.path.exists(self.mirrorlist):
-            print("BlackArch already installed.")
+            logger.info("BlackArch already installed.")
             return
 
-        print("Installing BlackArch...")
+        logger.info("Installing BlackArch...")
         subprocess.run(["sudo", "pacman", "-Syu"])
-        subprocess.run(["sudo", "pacman", "-S", "curl", "--noconfirm"])
-        subprocess.run(["curl", "-O", self.strap_url])
-        subprocess.run(["chmod", "+x", self.strap_file])
-        subprocess.run(["sudo", f"./{self.strap_file}"])
-        subprocess.run(["rm", "-rf", self.strap_file])
-        print("Done.")
+
+        result = subprocess.run(["sudo", "pacman", "-S", "curl", "--noconfirm"])
+        if result.returncode != 0:
+            logger.error("Failed to install curl.")
+            return
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            strap_path = os.path.join(tmpdir, "strap.sh")
+            result = subprocess.run(["curl", "-o", strap_path, self.strap_url])
+            if result.returncode != 0:
+                logger.error("Failed to download strap.sh.")
+                return
+
+            subprocess.run(["chmod", "+x", strap_path])
+            result = subprocess.run(["sudo", strap_path])
+            if result.returncode != 0:
+                logger.error("Failed to run strap.sh.")
+                return
+
+        logger.info("BlackArch installed.")

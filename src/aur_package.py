@@ -4,7 +4,7 @@ import subprocess
 import tempfile
 
 # Local Module
-from src.base import Base, load_config
+from src.base import Base, load_config, logger
 from src.package_manager import PackageManager
 
 
@@ -30,27 +30,33 @@ class AurPackage(Base):
     def _install_paru(self):
         result = self._run_cmd(["pacman", "-Qq", "paru-bin"])
         if result.returncode == 0:
-            print("paru already installed, skipping...")
+            logger.info("paru already installed, skipping...")
             return
 
-        print("Installing paru...")
+        logger.info("Installing paru...")
         with tempfile.TemporaryDirectory() as tmpdir:
-            subprocess.run(["git", "clone", self.paru_url], cwd=tmpdir)
-            subprocess.run(["makepkg", "-si"], cwd=os.path.join(tmpdir, "paru-bin"))
-        print("paru installed.")
+            result = subprocess.run(["git", "clone", self.paru_url], cwd=tmpdir)
+            if result.returncode != 0:
+                logger.error("Failed to clone paru-bin repository.")
+                return
+            result = subprocess.run(["makepkg", "-si"], cwd=os.path.join(tmpdir, "paru-bin"))
+            if result.returncode != 0:
+                logger.error("Failed to build and install paru.")
+                return
+        logger.info("paru installed.")
 
     def _install_aur_packages(self):
-        print("Installing AUR packages...")
+        logger.info("Installing AUR packages...")
         for package in self.aur_packages:
             result = self._run_cmd(["pacman", "-Qq", package])
             if result.returncode == 0:
-                print(f"{package} already installed, skipping...")
+                logger.info(f"{package} already installed, skipping...")
                 continue
 
-            print(f"Installing {package}...")
+            logger.info(f"Installing {package}...")
             result = subprocess.run(["paru", "-S", "--noconfirm", package])
             if result.returncode != 0:
-                print(f"Warning: failed to install {package}")
+                logger.warning(f"Failed to install {package}")
 
     def _enable_services(self):
         pm = PackageManager()

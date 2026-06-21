@@ -104,3 +104,18 @@ Arch-Script/
 ## License
 
 MIT
+
+---
+
+## Logging
+
+All actions are logged to `~/.arch-script.log`. If something fails, check the log:
+
+```bash
+cat ~/.arch-script.log
+```
+
+Log levels used:
+- `INFO` — normal progress
+- `WARNING` — something failed but script continues
+- `ERROR` — something failed and action was aborted

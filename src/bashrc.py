@@ -3,7 +3,7 @@ import os
 import subprocess
 
 # Local Module
-from src.base import Base, load_config
+from src.base import Base, load_config, logger
 
 
 class Bashrc(Base):
@@ -35,29 +35,38 @@ class Bashrc(Base):
             case "0":
                 return
             case _:
-                print("Invalid choice.")
+                logger.warning("Invalid choice.")
 
     def _backup(self):
-        print("Backing up .bashrc...")
-        subprocess.run([
+        logger.info("Backing up .bashrc...")
+        result = subprocess.run([
             "tar", "-cJf", self.backup_path,
             "-P", self.bashrc_path
         ])
-        print(f"Backup saved to {self.backup_path}")
+        if result.returncode == 0:
+            logger.info(f"Backup saved to {self.backup_path}")
+        else:
+            logger.warning("Backup failed.")
 
     def _restore(self):
         if not os.path.exists(self.backup_path):
-            print(f"No backup found at {self.backup_path}")
+            logger.warning(f"No backup found at {self.backup_path}")
             return
 
-        print("Restoring .bashrc...")
-        subprocess.run(["tar", "-xJf", self.backup_path, "-P"])
-        print("Restore complete.")
+        logger.info("Restoring .bashrc...")
+        result = subprocess.run(["tar", "-xJf", self.backup_path, "-P"])
+        if result.returncode == 0:
+            logger.info("Restore complete.")
+        else:
+            logger.warning("Restore failed.")
 
     def _add_aliases(self):
-        print("Adding aliases to .bashrc...")
-        with open(self.bashrc_path, "a") as f:
-            f.write(f"\n## Added by {self.username}\n")
-            for alias, command in self.aliases.items():
-                f.write(f"alias {alias}='{command}'\n")
-        print("Done.")
+        logger.info("Adding aliases to .bashrc...")
+        try:
+            with open(self.bashrc_path, "a") as f:
+                f.write(f"\n## Added by {self.username}\n")
+                for alias, command in self.aliases.items():
+                    f.write(f"alias {alias}='{command}'\n")
+            logger.info("Done.")
+        except IOError as e:
+            logger.error(f"Failed to write to .bashrc: {e}")
