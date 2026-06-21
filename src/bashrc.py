@@ -3,25 +3,16 @@ import os
 import subprocess
 
 # Local Module
-from base import Base
+from base import Base, load_config
 
 
 class Bashrc(Base):
     def __init__(self):
+        config = load_config()
         self.username = os.getenv("USER") or os.getenv("LOGNAME")
         self.home = os.path.expanduser("~")
         self.bashrc_path = f"{self.home}/.bashrc"
-
-        self.aliases = {
-            "s":        "sensors",
-            "py":       "python",
-            "search":   "pacman -Ss",
-            "install":  "sudo pacman -S",
-            "remove":   "sudo pacman -Rcsun",
-            "update":   "sudo pacman -Sy",
-            "notebook": "jupyter-notebook",
-            "activate": "source ~/.venv/bin/activate",
-        }
+        self.aliases = config["aliases"]
 
     def run(self):
         self._backup()

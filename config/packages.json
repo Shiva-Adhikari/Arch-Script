@@ -58,5 +58,15 @@
     ],
     "ufw_services": [
         "ufw"
-    ]
+    ],
+    "aliases": {
+        "s":        "sensors",
+        "py":       "python",
+        "search":   "pacman -Ss",
+        "install":  "sudo pacman -S",
+        "remove":   "sudo pacman -Rcsun",
+        "update":   "sudo pacman -Sy",
+        "notebook": "jupyter-notebook",
+        "activate": "source ~/.venv/bin/activate"
+    }
 }
