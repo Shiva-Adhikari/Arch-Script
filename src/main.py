@@ -25,16 +25,16 @@ def header():
 
 
 def menu():
-    click.echo("1.  Bashrc")
-    click.echo("2.  Sudoers")
-    click.echo("3.  Pacman Conf")
-    click.echo("4.  Package Manager")
-    click.echo("5.  AUR Packages")
-    click.echo("6.  BlackArch Installer")
-    click.echo("7.  UFW Firewall")
-    click.echo("8.  Uninstall Gnome Apps")
-    click.echo("9.  Bluetooth")
-    click.echo("10. Flathub Manager")
+    click.echo("1.  Bashrc          → manage aliases, backup and restore .bashrc")
+    click.echo("2.  Sudoers         → add current user to sudoers (no password)")
+    click.echo("3.  Pacman Conf     → enable parallel downloads, color, candy")
+    click.echo("4.  Package Manager → install all pacman packages")
+    click.echo("5.  AUR Packages    → install paru and all AUR packages")
+    click.echo("6.  BlackArch       → install BlackArch repo")
+    click.echo("7.  UFW Firewall    → install and enable ufw")
+    click.echo("8.  Uninstall       → remove default GNOME bloat")
+    click.echo("9.  Bluetooth       → install and enable bluetooth")
+    click.echo("10. Flathub         → install flatpak apps")
     click.echo("0.  Exit\n")
 
 

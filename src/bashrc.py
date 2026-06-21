@@ -19,9 +19,9 @@ class Bashrc(Base):
         self._submenu()
 
     def _submenu(self):
-        print("\n1. Add Aliases")
-        print("2. Backup")
-        print("3. Restore")
+        print("\n1. Add Aliases  → adds aliases from config to ~/.bashrc")
+        print("2. Backup       → saves current ~/.bashrc to ~/.bashrc.tar.xz")
+        print("3. Restore      → restores ~/.bashrc from backup")
         print("0. Back\n")
 
         choice = input("Enter Input: ").strip()
