@@ -12,10 +12,6 @@ class PackageManager(Base):
         self.enable_packages = config["pacman_services"]
 
     def run(self):
-        self.install_packages()
-        self.enable_service()
-
-    def install_packages(self):
         print("\nPackages to be installed:")
         for package in self.packages:
             print(f"  - {package}")
@@ -25,6 +21,10 @@ class PackageManager(Base):
             logger.info("Aborted.")
             return
 
+        self.install_packages()
+        self.enable_service()
+
+    def install_packages(self):
         logger.info("Installing packages using Pacman...")
         for package in self.packages:
             result = self._run_cmd(["pacman", "-Qq", package])
