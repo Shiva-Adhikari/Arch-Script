@@ -13,6 +13,15 @@ class Bluetooth(Base):
         self.services = config["bluetooth_services"]
 
     def run(self):
+        print("\nBluetooth packages to be installed:")
+        for package in self.packages:
+            print(f"  - {package}")
+
+        confirm = input("\nContinue? (yes/no): ").strip().lower()
+        if confirm != "yes":
+            logger.info("Aborted.")
+            return
+
         logger.info("Setting up Bluetooth...")
         pm = PackageManager()
         pm.packages = self.packages

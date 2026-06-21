@@ -16,6 +16,15 @@ class PackageManager(Base):
         self.enable_service()
 
     def install_packages(self):
+        print("\nPackages to be installed:")
+        for package in self.packages:
+            print(f"  - {package}")
+
+        confirm = input("\nContinue? (yes/no): ").strip().lower()
+        if confirm != "yes":
+            logger.info("Aborted.")
+            return
+
         logger.info("Installing packages using Pacman...")
         for package in self.packages:
             result = self._run_cmd(["pacman", "-Qq", package])

@@ -10,6 +10,15 @@ class Ufw(Base):
         self.services = config["ufw_services"]
 
     def run(self):
+        print("\nUFW packages to be installed:")
+        for package in self.packages:
+            print(f"  - {package}")
+
+        confirm = input("\nContinue? (yes/no): ").strip().lower()
+        if confirm != "yes":
+            logger.info("Aborted.")
+            return
+
         logger.info("Setting up UFW firewall...")
         pm = PackageManager()
         pm.packages = self.packages

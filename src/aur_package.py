@@ -17,6 +17,15 @@ class AurPackage(Base):
         self.paru_url = "https://aur.archlinux.org/paru-bin.git"
 
     def run(self):
+        print("\nAUR packages to be installed:")
+        for package in self.aur_packages:
+            print(f"  - {package}")
+
+        confirm = input("\nContinue? (yes/no): ").strip().lower()
+        if confirm != "yes":
+            logger.info("Aborted.")
+            return
+
         self._install_dependencies()
         self._install_paru()
         self._install_aur_packages()

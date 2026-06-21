@@ -11,6 +11,15 @@ class Flathub(Base):
         self.packages = config["flathub"]
 
     def run(self):
+        print("\nFlatpak apps to be installed:")
+        for package_name, package_id in self.packages.items():
+            print(f"  - {package_name} ({package_id})")
+
+        confirm = input("\nContinue? (yes/no): ").strip().lower()
+        if confirm != "yes":
+            logger.info("Aborted.")
+            return
+
         logger.info("Installing Flathub packages using flatpak...")
         for package_name, package_id in self.packages.items():
             logger.info(f"Installing {package_name}...")
