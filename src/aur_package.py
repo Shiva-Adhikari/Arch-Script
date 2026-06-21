@@ -1,6 +1,7 @@
 # Built in Module
 import os
 import subprocess
+import tempfile
 
 # Local Module
 from src.base import Base, load_config
@@ -33,11 +34,9 @@ class AurPackage(Base):
             return
 
         print("Installing paru...")
-        subprocess.run(["git", "clone", self.paru_url])
-        os.chdir("paru-bin")
-        subprocess.run(["makepkg", "-si"])
-        os.chdir("..")
-        subprocess.run(["rm", "-rf", "paru-bin"])
+        with tempfile.TemporaryDirectory() as tmpdir:
+            subprocess.run(["git", "clone", self.paru_url], cwd=tmpdir)
+            subprocess.run(["makepkg", "-si"], cwd=os.path.join(tmpdir, "paru-bin"))
         print("paru installed.")
 
     def _install_aur_packages(self):
@@ -49,7 +48,9 @@ class AurPackage(Base):
                 continue
 
             print(f"Installing {package}...")
-            subprocess.run(["paru", "-S", "--noconfirm", package])
+            result = subprocess.run(["paru", "-S", "--noconfirm", package])
+            if result.returncode != 0:
+                print(f"Warning: failed to install {package}")
 
     def _enable_services(self):
         pm = PackageManager()

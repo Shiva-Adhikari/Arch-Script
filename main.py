@@ -39,33 +39,36 @@ def menu():
 
 
 def main():
-    header()
-    menu()
+    while True:
+        header()
+        menu()
 
-    user_input = click.prompt("Enter Input", type=click.IntRange(0, 10))
-    match user_input:
-        case 0:
-            exit()
-        case 1:
-            Bashrc().run()
-        case 2:
-            Sudoers().run()
-        case 3:
-            PacmanConf().run()
-        case 4:
-            PackageManager().run()
-        case 5:
-            AurPackage().run()
-        case 6:
-            BlackArch().run()
-        case 7:
-            Ufw().run()
-        case 8:
-            Uninstall().run()
-        case 9:
-            Bluetooth().run()
-        case 10:
-            Flathub().run()
+        user_input = click.prompt("Enter Input", type=click.IntRange(0, 10))
+        match user_input:
+            case 0:
+                exit()
+            case 1:
+                Bashrc().run()
+            case 2:
+                Sudoers().run()
+            case 3:
+                PacmanConf().run()
+            case 4:
+                PackageManager().run()
+            case 5:
+                AurPackage().run()
+            case 6:
+                BlackArch().run()
+            case 7:
+                Ufw().run()
+            case 8:
+                Uninstall().run()
+            case 9:
+                Bluetooth().run()
+            case 10:
+                Flathub().run()
+
+        input("\nPress Enter to continue...")
 
 
 if __name__ == "__main__":
